@@ -31,14 +31,17 @@ class File
 
         if (pos != std::string::npos)
         {
-            string htmlContent = "<p>" + content + "</p>\n";
+            // Calculate position right after the target string
+            pos += token.length();
+
+            string htmlContent = "\n        <p>" + content + "</p>\n";
             
-            // 3. Insert the new text
+            // Insert the new text
             bufferstring.insert(pos, htmlContent);
 
-            // 4. Write the modified content back to the file
+            // Write the modified content back to the file
             std::ofstream outputFile(filename);
-            outputFile << content;
+            outputFile << bufferstring;
             outputFile.close();
             
             std::cout << "Text inserted successfully." << std::endl;
